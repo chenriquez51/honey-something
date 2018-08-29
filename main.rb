@@ -1,5 +1,5 @@
 def start
-  puts "You walk into work."
+  puts "You're at your work desk."
   puts "You open your laptop. You have a message."
   puts "Do you open the message?"
 
@@ -24,9 +24,9 @@ def indexing_question
   choice = $stdin.gets.chomp
 
   if choice.include?("restart")
-    # do something
+    fired("Production database goes down.")
   elsif choice.include?("ask")
-    # do something else
+    ask_oracle
   else
     fired("Production site went down.")
   end
@@ -41,11 +41,41 @@ def get_coffee
   choice = $stdin.gets.chomp
 
   if choice.include?("hipchat")
-    # passive agressive hipchat message method
+    passive_aggressive_hipchat_message
   elsif choice.match(/sink|dishwasher/)
-    puts "set in sink"
+    win("You saved the day. Office crisis resolved.")
   else
-    quit("Who the heck leaves a community spoon?")
+    quit("I'm tired of this place!!! Who leaves a spoon out?!")
+  end
+end
+
+def passive_aggressive_hipchat_message
+  puts "You go to hipchat."
+  puts "What do you post?"
+
+  print "> "
+  choice = $stdin.gets.chomp
+
+  puts "You've brow beaten the spoon leaver into not leaving spoons on the counter."
+  start
+end
+
+def ask_oracle
+  puts "You reachout to the Engineering Oracle (actual title)."
+  puts "What do you ask the Engineering Oracle?"
+
+  print "> "
+  choice = $stdin.gets.chomp
+
+  if choice.include?("help")
+    puts "Engineering Oracle: I'm busy!"
+    start
+  elsif choice.include?("broken")
+    puts "Engineering Oracle: Did you try to restart?"
+    start
+  else
+    puts "Engineering Oracle: What are you talking about?! Everything is awesome."
+    get_coffee
   end
 end
 
@@ -55,7 +85,12 @@ def fired(why)
 end
 
 def quit(reason)
-  put reason, "Adios!"
+  puts reason, "Adios!"
+  exit(0)
+end
+
+def win(reason)
+  puts reason, "Good job!"
   exit(0)
 end
 
