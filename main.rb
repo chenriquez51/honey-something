@@ -1,3 +1,16 @@
+module EngineeringOracle
+  def self.response
+    responses = [
+    "What are you talking about?! Everything is awesome.",
+    "Have you tried turning it on and off again?",
+    "Is it plugged in?",
+    "Did you ask someone else?",
+    "You should ask someone else.",
+    ]
+    puts "Engineering Oracle: #{responses.sample}"
+  end
+end
+
 def start
   puts "You're at your work desk."
   puts "You open your laptop. You have a message."
@@ -54,7 +67,7 @@ def passive_aggressive_hipchat_message
   puts "What do you post?"
 
   print "> "
-  choice = $stdin.gets.chomp
+  $stdin.gets.chomp
 
   puts "You've brow beaten the spoon leaver into not leaving spoons on the counter."
   start
@@ -74,7 +87,8 @@ def ask_oracle
     puts "Engineering Oracle: Did you try to restart?"
     start
   else
-    puts "Engineering Oracle: What are you talking about?! Everything is awesome."
+    EngineeringOracle.response
+
     get_coffee
   end
 end
