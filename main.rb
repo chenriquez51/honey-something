@@ -1,13 +1,36 @@
-module EngineeringOracle
-  def self.response
-    responses = [
+class Person
+
+  def initialize(name)
+    @name = name
+    @responses = [
+    "Hello."
+    ]
+  end
+
+  def response
+    return "#{@name}: #{@responses.sample}"
+  end
+end
+
+class EngineeringOracle < Person
+  def initialize(name)
+    super(name)
+    @responses = [
     "What are you talking about?! Everything is awesome.",
     "Have you tried turning it on and off again?",
     "Is it plugged in?",
     "Did you ask someone else?",
     "You should ask someone else.",
     ]
-    puts "Engineering Oracle: #{responses.sample}"
+  end
+end
+
+class Trish < Person
+  def initialize(name)
+    super(name)
+    @responses = [
+    "I don't work here."
+    ]
   end
 end
 
@@ -38,7 +61,9 @@ def indexing_question
 
   if choice.include?("restart")
     fired("Production database goes down.")
-  elsif choice.include?("ask")
+  elsif choice.include?("Trish")
+    ask_trish
+  elsif choice.include?("Oracle")
     ask_oracle
   else
     fired("Production site went down.")
@@ -79,19 +104,36 @@ def ask_oracle
 
   print "> "
   choice = $stdin.gets.chomp
+  person = EngineeringOracle.new('Engineering Oracle')
 
-  if choice.include?("help")
-    puts "Engineering Oracle: I'm busy!"
-    start
-  elsif choice.include?("broken")
-    puts "Engineering Oracle: Did you try to restart?"
+  if choice.include?("help") || choice.include?("broken")
+    puts person.response
     start
   else
-    EngineeringOracle.response
+    puts person.response
 
     get_coffee
   end
 end
+
+def ask_trish
+  puts "You reachout to Trish (not actual title)."
+  puts "What do you ask Trish?"
+
+  print "> "
+  choice = $stdin.gets.chomp
+  person = Trish.new('Trish')
+
+  if choice.include?("help") || choice.include?("broken")
+    puts person.response
+    start
+  else
+    puts person.response
+
+    get_coffee
+  end
+end
+
 
 def fired(why)
   puts why, "You're fired!"
