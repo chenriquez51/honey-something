@@ -1,38 +1,5 @@
-class Person
-
-  def initialize(name)
-    @name = name
-    @responses = [
-    "Hello."
-    ]
-  end
-
-  def response
-    return "#{@name}: #{@responses.sample}"
-  end
-end
-
-class EngineeringOracle < Person
-  def initialize(name)
-    super(name)
-    @responses = [
-    "What are you talking about?! Everything is awesome.",
-    "Have you tried turning it on and off again?",
-    "Is it plugged in?",
-    "Did you ask someone else?",
-    "You should ask someone else.",
-    ]
-  end
-end
-
-class Trish < Person
-  def initialize(name)
-    super(name)
-    @responses = [
-    "I don't work here."
-    ]
-  end
-end
+require './engineering_oracle'
+require './trish'
 
 def start
   puts "You're at your work desk."
